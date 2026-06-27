@@ -1,34 +1,23 @@
 export default function TaskCard({
-  title,
-  description,
-  completed,
-  assignedTo,
-  priority,
-  onToggleDone,
+  task,
+  onUpdate,
   onDelete,
+  onEdit,
 }) {
+  const { title, description, status, assignedTo, priority } = task;
+  const completed = status === "done";
+
+  const handleStatusChange = (e) => {
+    onUpdate({ status: e.target.value });
+  };
+
   return (
     <div
-      className={`border rounded-xl p-4 flex items-start justify-between gap-4 transition
+      className={`border rounded-xl p-4 flex flex-col gap-3 transition
       ${completed ? "bg-gray-50 border-gray-200" : "bg-white border-gray-300"}
       `}
     >
-      {/* Left side */}
-      <div className="flex gap-3">
-        
-        {/* Checkbox */}
-        <button
-          onClick={onToggleDone}
-          className={`mt-1 w-5 h-5 rounded border flex items-center justify-center
-          ${completed ? "bg-black border-black" : "border-gray-400"}
-          `}
-        >
-          {completed && (
-            <span className="text-white text-xs">✓</span>
-          )}
-        </button>
-
-        {/* Content */}
+      <div className="flex items-start justify-between gap-4">
         <div>
           <h3
             className={`font-medium ${
@@ -71,14 +60,33 @@ export default function TaskCard({
         </div>
       </div>
 
-      {/* Right actions */}
-      <div className="flex gap-2">
-        <button
-          onClick={onDelete}
-          className="text-xs px-2 py-1 rounded-md bg-red-50 text-red-600 hover:bg-red-100 transition"
+      <div className="flex items-center justify-between pt-2 border-t border-gray-100">
+        <select
+          value={status}
+          onChange={handleStatusChange}
+          className={`text-xs border rounded-md px-2 py-1 outline-none ${
+            completed ? "bg-gray-100 border-gray-200 text-gray-500" : "bg-white border-gray-300"
+          }`}
         >
-          Delete
-        </button>
+          <option value="todo">To Do</option>
+          <option value="in-progress">In Progress</option>
+          <option value="done">Done</option>
+        </select>
+
+        <div className="flex gap-2">
+          <button
+            onClick={onEdit}
+            className="text-xs px-2 py-1 rounded-md bg-blue-50 text-blue-600 hover:bg-blue-100 transition"
+          >
+            Edit
+          </button>
+          <button
+            onClick={onDelete}
+            className="text-xs px-2 py-1 rounded-md bg-red-50 text-red-600 hover:bg-red-100 transition"
+          >
+            Delete
+          </button>
+        </div>
       </div>
     </div>
   );

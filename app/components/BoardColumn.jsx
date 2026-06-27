@@ -1,4 +1,4 @@
-export default function BoardColumn({ title, children }) {
+export default function BoardColumn({ title, count = 0, children }) {
   return (
     <div className="bg-gray-100 border border-gray-200 rounded-2xl shadow-sm p-4 min-h-[500px]">
 
@@ -8,7 +8,7 @@ export default function BoardColumn({ title, children }) {
         </h2>
 
         <span className="bg-white px-2 py-1 rounded-full text-xs font-medium text-gray-600">
-          0
+          {count}
         </span>
       </div>
 
