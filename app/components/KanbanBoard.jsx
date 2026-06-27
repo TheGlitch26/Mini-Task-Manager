@@ -1,7 +1,7 @@
 import BoardColumn from "./BoardColumn";
 import TaskCard from "./TaskCard";
 
-export default function KanbanBoard({ tasks, onUpdate, onDelete, onEdit }) {
+export default function KanbanBoard({ tasks, onUpdate, onDelete, onEdit, isLoggedIn }) {
   const todoTasks       = tasks.filter(t => t.status === "todo");
   const inProgressTasks = tasks.filter(t => t.status === "in-progress");
   const doneTasks       = tasks.filter(t => t.status === "done");
@@ -14,6 +14,7 @@ export default function KanbanBoard({ tasks, onUpdate, onDelete, onEdit }) {
         onUpdate={(updates) => onUpdate(task.id, updates)}
         onDelete={() => onDelete(task.id)}
         onEdit={() => onEdit(task)}
+        isLoggedIn={isLoggedIn}
       />
     ));
 

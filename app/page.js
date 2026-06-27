@@ -1,10 +1,11 @@
 "use client";
-
 import { useState, useEffect } from "react";
+import AuthHeader from "@/app/components/AuthHeader";
 import TaskList from "@/app/components/TaskList";
 import KanbanBoard from "@/app/components/KanbanBoard";
 import TaskFormModal from "@/app/components/TaskFormModal";
 import { supabase } from "@/app/lib/supabase";
+import { useAuth } from "@/app/hooks/useAuth";
 
 /* ── SVG Icons ── */
 const SunIcon = () => (
@@ -30,6 +31,7 @@ const LogoIcon = () => (
 );
 
 export default function Home() {
+  const { user } = useAuth();
   const [tasks, setTasks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [viewMode, setViewMode] = useState("list");
@@ -156,6 +158,7 @@ export default function Home() {
 
           {/* Right actions — Kinso style */}
           <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <AuthHeader />
             <button
               onClick={toggleTheme}
               title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
@@ -173,12 +176,12 @@ export default function Home() {
             >
               {theme === "dark" ? <SunIcon /> : <MoonIcon />}
             </button>
+            {user && (
             <button onClick={() => handleOpenModal()} className="btn-primary">
               New Task →
-            </button>
+            </button>)}
           </div>
         </header>
-
         {/* ── HERO HEADING — Kinso bold style ── */}
         <div style={{ marginBottom: 40 }}>
           <h1 style={{
@@ -254,6 +257,7 @@ export default function Home() {
               onUpdate={handleUpdateTask}
               onDelete={handleDeleteTask}
               onEdit={handleOpenModal}
+              isLoggedIn={!!user}
             />
           ) : (
             <KanbanBoard
@@ -261,6 +265,7 @@ export default function Home() {
               onUpdate={handleUpdateTask}
               onDelete={handleDeleteTask}
               onEdit={handleOpenModal}
+              isLoggedIn={!!user}
             />
           )}
         </section>
@@ -286,5 +291,6 @@ export default function Home() {
         initialData={editingTask}
       />
     </main>
+    
   );
 }

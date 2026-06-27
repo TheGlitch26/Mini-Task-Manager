@@ -10,7 +10,7 @@ const STATUS_OPTIONS = [
   { value: "done",        label: "Done" },
 ];
 
-export default function TaskCard({ task, onUpdate, onDelete, onEdit }) {
+export default function TaskCard({ task, onUpdate, onDelete, onEdit, isLoggedIn}) {
   const { title, description, status, assignedTo, priority } = task;
   const completed = status === "done";
   const p = PRIORITY_STYLES[priority] || PRIORITY_STYLES.medium;
@@ -68,6 +68,7 @@ export default function TaskCard({ task, onUpdate, onDelete, onEdit }) {
         </div>
 
         {/* Buttons */}
+        {isLoggedIn && (
         <div style={{ display: "flex", gap: 5, flexShrink: 0 }}>
           <button
             onClick={onEdit}
@@ -96,6 +97,7 @@ export default function TaskCard({ task, onUpdate, onDelete, onEdit }) {
             Delete
           </button>
         </div>
+        )}
       </div>
 
       {/* Bottom meta row */}
@@ -126,6 +128,7 @@ export default function TaskCard({ task, onUpdate, onDelete, onEdit }) {
         <select
           value={status}
           onChange={e => onUpdate({ status: e.target.value })}
+          disabled={!isLoggedIn}
           style={{
             fontSize: 11, padding: "3px 8px",
             borderRadius: 999, border: "1px solid var(--border-default)",
