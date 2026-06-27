@@ -2,12 +2,12 @@ import BoardColumn from "./BoardColumn";
 import TaskCard from "./TaskCard";
 
 export default function KanbanBoard({ tasks, onUpdate, onDelete, onEdit }) {
-  const todoTasks = tasks.filter(t => t.status === "todo");
+  const todoTasks       = tasks.filter(t => t.status === "todo");
   const inProgressTasks = tasks.filter(t => t.status === "in-progress");
-  const doneTasks = tasks.filter(t => t.status === "done");
+  const doneTasks       = tasks.filter(t => t.status === "done");
 
-  const renderTasks = (columnTasks) => (
-    columnTasks.map(task => (
+  const renderCards = (colTasks) =>
+    colTasks.map(task => (
       <TaskCard
         key={task.id}
         task={task}
@@ -15,20 +15,24 @@ export default function KanbanBoard({ tasks, onUpdate, onDelete, onEdit }) {
         onDelete={() => onDelete(task.id)}
         onEdit={() => onEdit(task)}
       />
-    ))
-  );
+    ));
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div style={{
+      display: "flex",
+      gap: 16,
+      height: 520,
+      overflowX: "auto",
+    }}>
       <BoardColumn title="To Do" count={todoTasks.length}>
-        {renderTasks(todoTasks)}
+        {renderCards(todoTasks)}
       </BoardColumn>
       <BoardColumn title="In Progress" count={inProgressTasks.length}>
-        {renderTasks(inProgressTasks)}
+        {renderCards(inProgressTasks)}
       </BoardColumn>
       <BoardColumn title="Done" count={doneTasks.length}>
-        {renderTasks(doneTasks)}
+        {renderCards(doneTasks)}
       </BoardColumn>
     </div>
   );
-}
+}

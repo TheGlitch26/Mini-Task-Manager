@@ -1,26 +1,250 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 
+/* ============================================
+   KINSO-SOUL DESIGN SYSTEM
+   Warm cream light · Dark grid texture
+   ============================================ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* ── DARK THEME (default) ── */
+  --bg-base:        #0E0E10;
+  --bg-surface:     #141416;
+  --bg-elevated:    #1C1C20;
+  --bg-hover:       #222228;
+
+  --border-subtle:  rgba(255, 255, 255, 0.06);
+  --border-default: rgba(255, 255, 255, 0.10);
+  --border-strong:  rgba(255, 255, 255, 0.18);
+
+  --text-primary:   #F5F5F7;
+  --text-secondary: #8A8A9A;
+  --text-muted:     #444452;
+
+  /* Kinso teal/cyan accent for dark mode */
+  --accent-primary:  #5ECFCA;
+  --accent-secondary: #3DB8B2;
+  --accent-glow:    rgba(94, 207, 202, 0.18);
+  --accent-gradient: linear-gradient(135deg, #5ECFCA 0%, #4AAAA6 100%);
+
+  /* Warm terracotta for logo */
+  --brand-warm:     #C96A40;
+  --brand-warm-2:   #E8835A;
+
+  --priority-high-bg:    rgba(239, 68, 68, 0.10);
+  --priority-high-text:  #F87171;
+  --priority-high-bar:   #EF4444;
+  --priority-med-bg:     rgba(245, 158, 11, 0.10);
+  --priority-med-text:   #FBB040;
+  --priority-med-bar:    #F59E0B;
+  --priority-low-bg:     rgba(94, 207, 202, 0.12);
+  --priority-low-text:   #5ECFCA;
+  --priority-low-bar:    #5ECFCA;
+
+  --status-todo-color:       #6366F1;
+  --status-progress-color:   #F59E0B;
+  --status-done-color:       #5ECFCA;
+
+  --radius-sm:  8px;
+  --radius-md:  12px;
+  --radius-lg:  16px;
+  --radius-xl:  20px;
+
+  --shadow-card:  0 1px 3px rgba(0,0,0,0.5), 0 0 0 1px var(--border-subtle);
+  --shadow-modal: 0 32px 80px rgba(0,0,0,0.8), 0 0 0 1px var(--border-default);
+  --shadow-glow:  0 0 40px rgba(94,207,202,0.08);
+
+  --transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ── LIGHT THEME ── */
+[data-theme="light"] {
+  /* Warm peachy-cream — Kinso's signature */
+  --bg-base:        #FEF0EA;
+  --bg-surface:     #FFFBF8;
+  --bg-elevated:    #F9EFE8;
+  --bg-hover:       #F4E8DF;
+
+  --border-subtle:  rgba(180, 100, 60, 0.10);
+  --border-default: rgba(180, 100, 60, 0.18);
+  --border-strong:  rgba(180, 100, 60, 0.28);
+
+  --text-primary:   #0F0F0F;
+  --text-secondary: #6A5A52;
+  --text-muted:     #B09A90;
+
+  /* Kinso terracotta accent for light mode */
+  --accent-primary:  #C96A40;
+  --accent-secondary: #A85430;
+  --accent-glow:    rgba(201, 106, 64, 0.15);
+  --accent-gradient: linear-gradient(135deg, #C96A40 0%, #E8835A 100%);
+
+  --priority-high-bg:    rgba(239, 68, 68, 0.08);
+  --priority-high-text:  #DC2626;
+  --priority-high-bar:   #EF4444;
+  --priority-med-bg:     rgba(180, 83, 9, 0.08);
+  --priority-med-text:   #B45309;
+  --priority-med-bar:    #D97706;
+  --priority-low-bg:     rgba(201, 106, 64, 0.10);
+  --priority-low-text:   #C96A40;
+  --priority-low-bar:    #C96A40;
+
+  --status-todo-color:       #6366F1;
+  --status-progress-color:   #D97706;
+  --status-done-color:       #059669;
+
+  --shadow-card:  0 1px 4px rgba(120,60,20,0.08), 0 0 0 1px var(--border-subtle);
+  --shadow-modal: 0 24px 64px rgba(120,60,20,0.18), 0 0 0 1px var(--border-default);
+  --shadow-glow:  0 0 40px rgba(201,106,64,0.06);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* ============================================
+   BASE
+   ============================================ */
+*, *::before, *::after { box-sizing: border-box; }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  transition: background 250ms ease, color 250ms ease;
+  min-height: 100vh;
 }
+
+/* ── DARK MODE GRID TEXTURE (Kinso signature) ── */
+:root body::before,
+html:not([data-theme="light"]) body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 36px 36px;
+}
+
+[data-theme="light"] body::before {
+  background-image:
+    linear-gradient(rgba(160,80,30,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(160,80,30,0.04) 1px, transparent 1px);
+  background-size: 36px 36px;
+}
+
+body > * { position: relative; z-index: 1; }
+
+/* ============================================
+   SCROLLBAR
+   ============================================ */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-default); border-radius: 99px; }
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  background: var(--text-primary);
+  color: var(--bg-base);
+  letter-spacing: -0.1px;
+  transition: all var(--transition);
+  white-space: nowrap;
+}
+
+.btn-primary:hover {
+  opacity: 0.85;
+  transform: translateY(-1px);
+}
+
+.btn-primary:active { transform: translateY(0); }
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid var(--border-default);
+  background: transparent;
+  color: var(--text-secondary);
+  transition: all var(--transition);
+}
+
+.btn-ghost:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+  border-color: var(--border-strong);
+}
+
+/* ============================================
+   ACCENT TEXT
+   ============================================ */
+.accent-text {
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============================================
+   KINSO GLOW BORDER (light: warm, dark: teal)
+   ============================================ */
+.glow-border {
+  box-shadow:
+    0 0 0 1px var(--border-default),
+    0 0 24px var(--accent-glow),
+    var(--shadow-card);
+}
+
+/* ============================================
+   SKELETON
+   ============================================ */
+@keyframes shimmer {
+  0%   { background-position: -600px 0; }
+  100% { background-position: 600px 0; }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--bg-surface) 25%,
+    var(--bg-elevated) 50%,
+    var(--bg-surface) 75%
+  );
+  background-size: 1200px 100%;
+  animation: shimmer 1.6s infinite linear;
+  border-radius: var(--radius-sm);
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fadeInUp { animation: fadeInUp 220ms ease forwards; }
+
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(0.96) translateY(12px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.animate-modalIn { animation: modalIn 200ms cubic-bezier(0.34, 1.4, 0.64, 1) forwards; }

@@ -4,8 +4,14 @@ export default function TaskList({ tasks, onUpdate, onDelete, onEdit }) {
   return (
     <div className="space-y-3">
       {tasks.length === 0 ? (
-        <div className="text-center text-gray-500 py-10 border border-dashed rounded-lg">
-          No tasks yet. Create your first task.
+        <div style={{
+          textAlign: "center", color: "var(--text-muted)",
+          padding: "48px 16px",
+          border: "1px dashed var(--border-subtle)",
+          borderRadius: "var(--radius-md)",
+          fontSize: 13,
+        }}>
+          No tasks yet. Hit <strong style={{ color: "var(--text-secondary)" }}>+ New Task</strong> to get started.
         </div>
       ) : (
         tasks.map((task) => (
