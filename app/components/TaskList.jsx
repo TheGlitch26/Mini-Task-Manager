@@ -1,6 +1,6 @@
 import TaskCard from "./TaskCard";
 
-export default function TaskList({ tasks, onUpdate, onDelete, onEdit }) {
+export default function TaskList({ tasks, onUpdate, onDelete, onEdit, isLoggedIn }) {
   return (
     <div className="space-y-3">
       {tasks.length === 0 ? (
@@ -21,9 +21,10 @@ export default function TaskList({ tasks, onUpdate, onDelete, onEdit }) {
             onUpdate={(updates) => onUpdate(task.id, updates)}
             onDelete={() => onDelete(task.id)}
             onEdit={() => onEdit(task)}
+            isLoggedIn={isLoggedIn}
           />
         ))
       )}
     </div>
   );
-}
+}
