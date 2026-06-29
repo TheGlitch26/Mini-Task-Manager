@@ -38,7 +38,7 @@ export default function BoardColumn({ title, count = 0, children }) {
       {/* Scrollable cards */}
       <div style={{
         display: "flex", flexDirection: "column", gap: 8,
-        overflowY: "auto", flex: 1, paddingRight: 2,
+        overflowY: "auto", flex: 1, minHeight: 0, paddingRight: 2,
       }}>
         {children}
         {count === 0 && (
