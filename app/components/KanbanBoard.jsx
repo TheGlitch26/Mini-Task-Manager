@@ -8,14 +8,16 @@ export default function KanbanBoard({ tasks, onUpdate, onDelete, onEdit, isLogge
 
   const renderCards = (colTasks) =>
     colTasks.map(task => (
-      <TaskCard
-        key={task.id}
-        task={task}
-        onUpdate={(updates) => onUpdate(task.id, updates)}
-        onDelete={() => onDelete(task.id)}
-        onEdit={() => onEdit(task)}
-        isLoggedIn={isLoggedIn}
-      />
+      <div key={task.id} style={{ flexShrink: 0 }}>
+        <TaskCard
+          key={task.id}
+          task={task}
+          onUpdate={(updates) => onUpdate(task.id, updates)}
+          onDelete={() => onDelete(task.id)}
+          onEdit={() => onEdit(task)}
+          isLoggedIn={isLoggedIn}
+        />
+      </div>
     ));
 
   return (
