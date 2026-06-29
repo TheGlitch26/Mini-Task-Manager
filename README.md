@@ -2,7 +2,7 @@
 
 TaskFlow is a lightweight task management app built for our team to track work in real time. Anyone can view the current state of all tasks without needing an account, but only authenticated team members can create, update, or move tasks. It's designed to be simple, fast, and just functional enough for a small group to stay in sync without the overhead of a full project management tool.
 
-🔗 **Live App:** [https://your-taskflow-app.vercel.app]([https://your-taskflow-app.vercel.app](https://mini-task-manager-bay.vercel.app/))
+🔗 **Live App:** [[https://your-taskflow-app.vercel.app](https://mini-task-manager-bay.vercel.app/)]([https://your-taskflow-app.vercel.app](https://mini-task-manager-bay.vercel.app/))
 
 ## Overview
 
